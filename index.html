@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MJ HandiCraft</title>
+    <meta
+      name="description"
+      content="MJ HandiCraft - Handcrafted products made with love and precision."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="hero" id="home">
+      <nav class="nav">
+        <div class="logo">MJ <span>HandiCraft</span></div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Handcrafted pieces for your beautiful home.</h1>
+          <p>
+            At <strong>MJ HandiCraft</strong>, we create unique, handmade items
+            with attention to detail and a passion for craftsmanship.
+          </p>
+          <div class="hero-actions">
+            <a href="#products" class="btn primary">View Products</a>
+            <a href="#contact" class="btn secondary">Contact Us</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="hero-card hero-card-1">Handmade Decor</div>
+          <div class="hero-card hero-card-2">Custom Gifts</div>
+          <div class="hero-card hero-card-3">Traditional Art</div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section" id="products">
+        <div class="section-header">
+          <h2>Featured Products</h2>
+          <p>Examples of what MJ HandiCraft can create for you.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="card-tag">Custom</div>
+            <h3>Personalized Gift Items</h3>
+            <p>
+              Customized mugs, frames, name plates, and more — perfect for
+              birthdays, weddings, and special occasions.
+            </p>
+          </article>
+          <article class="card">
+            <div class="card-tag">Decor</div>
+            <h3>Home & Wall Decor</h3>
+            <p>
+              Handcrafted wall hangings, table decor, and centerpieces that add
+              warmth and character to your space.
+            </p>
+          </article>
+          <article class="card">
+            <div class="card-tag">Traditional</div>
+            <h3>Ethnic & Festive Art</h3>
+            <p>
+              Traditional art pieces inspired by local culture, ideal for
+              festivals and home temples.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section alt" id="about">
+        <div class="section-header">
+          <h2>About MJ HandiCraft</h2>
+        </div>
+        <div class="about-grid">
+          <div>
+            <p>
+              MJ HandiCraft is a small business dedicated to creating handmade,
+              high-quality products. Every piece is carefully designed and
+              crafted, making sure it is unique and long lasting.
+            </p>
+            <p>
+              You can customize colors, styles, and designs to match your
+              personal taste or brand. We focus on small-batch, made-to-order
+              crafting, not mass production.
+            </p>
+          </div>
+          <ul class="about-list">
+            <li>✔ Custom designs available on request</li>
+            <li>✔ Handmade with premium materials</li>
+            <li>✔ Perfect for gifting and home decor</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="section-header">
+          <h2>Contact & Orders</h2>
+          <p>
+            Share your requirements and we’ll get back to you with details and
+            pricing.
+          </p>
+        </div>
+        <div class="contact-grid">
+          <form
+            class="contact-form"
+            onsubmit="handleContactSubmit(event)"
+          >
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message">Message / Order Details</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                placeholder="Example: I want 3 custom name plates with these colors..."
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn primary full-width">
+              Send Message (demo)
+            </button>
+            <p class="form-note">
+              This is a demo form on GitHub Pages. You can replace it later with
+              a real form service or link to WhatsApp / email.
+            </p>
+          </form>
+          <div class="contact-info">
+            <h3>Direct Contact</h3>
+            <p>
+              Replace the details below with your real contact information.
+            </p>
+            <ul>
+              <li><strong>Email:</strong> youremail@example.com</li>
+              <li><strong>Phone:</strong> +91-99999-99999</li>
+              <li><strong>Location:</strong> Your City, Your State</li>
+              <li>
+                <strong>Instagram:</strong> @mj_handicraft
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> MJ HandiCraft. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
