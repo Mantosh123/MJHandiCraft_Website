@@ -3,177 +3,171 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MJ HandiCraft</title>
+    <title>MJ HandiCraft | Handcrafted Jewellery & Decor</title>
     <meta
       name="description"
-      content="MJ HandiCraft - Handcrafted products made with love and precision."
+      content="MJ HandiCraft - Handcrafted pendants, ear rings, and decor made with love and precision."
     />
     <link rel="stylesheet" href="src/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sansita:wght@800&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <header class="hero" id="home">
-      <nav class="nav">
-        <div class="logo">
-          <img src="assets/logo.png" alt="MJ HandiCraft logo" class="logo-image" />
-          <span class="logo-text">MJ HandiCraft</span>
-        </div>
-        <ul class="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#products">Products</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+    <!-- Top promo bar (Craft Affair style) -->
+    <div class="promo-bar">
+      <p>Spend ₹1999 and Get Free Shipping!</p>
+    </div>
 
-      <div class="hero-content">
-        <div class="hero-text">
-          <h1>Handcrafted pieces for your beautiful home.</h1>
-          <p>
-            At <strong>MJ HandiCraft</strong>, we create unique, handmade items
-            with attention to detail and a passion for craftsmanship.
-          </p>
-          <div class="hero-actions">
-            <a href="#products" class="btn primary">View Products</a>
-            <a href="#contact" class="btn secondary">Contact Us</a>
-          </div>
+    <div class="app-wrap">
+      <!-- Left sidebar menu -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <a href="#home" class="logo">MJ HandiCraft</a>
         </div>
-        <div class="hero-image">
-          <div class="hero-card hero-card-1">Handmade Decor</div>
-          <div class="hero-card hero-card-2">Custom Gifts</div>
-          <div class="hero-card hero-card-3">Traditional Art</div>
-        </div>
-      </div>
-    </header>
-
-    <main>
-      <section class="section" id="products">
-        <div class="section-header">
-          <h2>Featured Products</h2>
-          <p>Examples of what MJ HandiCraft can create for you.</p>
-        </div>
-        <div class="cards">
-          <article class="card">
-            <div class="card-tag">Custom</div>
-            <h3>Personalized Gift Items</h3>
-            <p>
-              Customized mugs, frames, name plates, and more — perfect for
-              birthdays, weddings, and special occasions.
-            </p>
-          </article>
-          <article class="card">
-            <div class="card-tag">Decor</div>
-            <h3>Home & Wall Decor</h3>
-            <p>
-              Handcrafted wall hangings, table decor, and centerpieces that add
-              warmth and character to your space.
-            </p>
-          </article>
-          <article class="card">
-            <div class="card-tag">Traditional</div>
-            <h3>Ethnic & Festive Art</h3>
-            <p>
-              Traditional art pieces inspired by local culture, ideal for
-              festivals and home temples.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section alt" id="about">
-        <div class="section-header">
-          <h2>About MJ HandiCraft</h2>
-        </div>
-        <div class="about-grid">
-          <div>
-            <p>
-              MJ HandiCraft is a small business dedicated to creating handmade,
-              high-quality products. Every piece is carefully designed and
-              crafted, making sure it is unique and long lasting.
-            </p>
-            <p>
-              You can customize colors, styles, and designs to match your
-              personal taste or brand. We focus on small-batch, made-to-order
-              crafting, not mass production.
-            </p>
-          </div>
-          <ul class="about-list">
-            <li>✔ Custom designs available on request</li>
-            <li>✔ Handmade with premium materials</li>
-            <li>✔ Perfect for gifting and home decor</li>
+        <nav class="sidebar-nav">
+          <ul class="menu-list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#products">Shop</a></li>
+            <li class="menu-label">Shop by Category</li>
+            <li><a href="#products-pendant">Pendants</a></li>
+            <li><a href="#products-earring">Ear Rings</a></li>
+            <li><a href="#products-decor">Home Decor</a></li>
+            <li class="menu-label">Info</li>
+            <li><a href="#about">About us</a></li>
+            <li><a href="#contact">Contact us</a></li>
           </ul>
+        </nav>
+        <div class="sidebar-footer">
+          <p class="sidebar-cta">Custom orders welcome!</p>
+          <a href="#contact" class="btn primary full-width">Get in Touch</a>
         </div>
-      </section>
+      </aside>
 
-      <section class="section" id="contact">
-        <div class="section-header">
-          <h2>Contact & Orders</h2>
-          <p>
-            Share your requirements and we’ll get back to you with details and
-            pricing.
-          </p>
-        </div>
-        <div class="contact-grid">
-          <form
-            class="contact-form"
-            onsubmit="handleContactSubmit(event)"
-          >
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input id="name" name="name" type="text" required />
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" required />
-              </div>
+      <!-- Main content -->
+      <div class="main-content">
+        <!-- Top header (logo + search/cart placeholders) -->
+        <header class="top-header">
+          <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="header-center">
+            <a href="#home" class="logo-header">MJ HandiCraft</a>
+          </div>
+          <div class="header-actions">
+            <a href="#contact" class="header-link">Contact</a>
+          </div>
+        </header>
+
+        <!-- Hero / Home -->
+        <section class="hero" id="home">
+          <div class="hero-inner">
+            <h1>Craft Beautiful Creations with Handcrafted Jewellery & Decor</h1>
+            <p>Unique pendants, ear rings, and home decor — handmade with care.</p>
+            <div class="hero-actions">
+              <a href="#products" class="btn primary">Shop Now</a>
+              <a href="#contact" class="btn secondary">Contact Us</a>
             </div>
-            <div class="form-group">
-              <label for="message">Message / Order Details</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
-                placeholder="Example: I want 3 custom name plates with these colors..."
-                required
-              ></textarea>
+          </div>
+        </section>
+
+        <!-- Featured categories (Craft Affair style blocks) -->
+        <section class="categories-section">
+          <h2 class="section-title">Featured Categories</h2>
+          <p class="section-subtitle">Explore the wide range of handcrafted items</p>
+          <div class="category-cards">
+            <a href="#products-pendant" class="category-card">
+              <span class="category-icon">◆</span>
+              <h3>Pendants</h3>
+              <p>Handcrafted pendants</p>
+            </a>
+            <a href="#products-earring" class="category-card">
+              <span class="category-icon">◇</span>
+              <h3>Ear Rings</h3>
+              <p>Ear rings & accessories</p>
+            </a>
+            <a href="#products-decor" class="category-card">
+              <span class="category-icon">▣</span>
+              <h3>Home Decor</h3>
+              <p>Wall & table decor</p>
+            </a>
+          </div>
+        </section>
+
+        <!-- Products -->
+        <section class="section products-section" id="products">
+          <h2 class="section-title">Featured Products</h2>
+          <p class="section-subtitle">Browse pendants, ear rings, and more.</p>
+          <div id="product-gallery" class="product-gallery"></div>
+        </section>
+
+        <!-- About -->
+        <section class="section alt" id="about">
+          <h2 class="section-title">About MJ HandiCraft</h2>
+          <div class="about-grid">
+            <div class="about-text">
+              <p>
+                MJ HandiCraft is a small business dedicated to creating handmade,
+                high-quality products. Every piece is carefully designed and
+                crafted to be unique and long lasting.
+              </p>
+              <p>
+                Customize colors, styles, and designs to match your taste. We focus on
+                small-batch, made-to-order crafting.
+              </p>
             </div>
-            <button type="submit" class="btn primary full-width">
-              Send Message (demo)
-            </button>
-            <p class="form-note">
-              This is a demo form on GitHub Pages. You can replace it later with
-              a real form service or link to WhatsApp / email.
-            </p>
-          </form>
-          <div class="contact-info">
-            <h3>Direct Contact</h3>
-            <p>
-              Replace the details below with your real contact information.
-            </p>
-            <ul>
-              <li><strong>Email:</strong> youremail@example.com</li>
-              <li><strong>Phone:</strong> +91-99999-99999</li>
-              <li><strong>Location:</strong> Your City, Your State</li>
-              <li>
-                <strong>Instagram:</strong> @mj_handicraft
-              </li>
+            <ul class="about-list">
+              <li>✔ Custom designs on request</li>
+              <li>✔ Handmade with premium materials</li>
+              <li>✔ Perfect for gifting and home decor</li>
             </ul>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
 
-    <footer class="footer">
-      <p>© <span id="year"></span> MJ HandiCraft. All rights reserved.</p>
-    </footer>
+        <!-- Contact -->
+        <section class="section" id="contact">
+          <h2 class="section-title">Contact & Orders</h2>
+          <p class="section-subtitle">Share your requirements and we’ll get back with details and pricing.</p>
+          <div class="contact-grid">
+            <form class="contact-form" onsubmit="handleContactSubmit(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input id="name" name="name" type="text" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="message">Message / Order Details</label>
+                <textarea id="message" name="message" rows="4" placeholder="E.g. I want 3 custom name plates..." required></textarea>
+              </div>
+              <button type="submit" class="btn primary full-width">Send Message</button>
+            </form>
+            <div class="contact-info">
+              <h3>Direct Contact</h3>
+              <ul>
+                <li><strong>Email:</strong> youremail@example.com</li>
+                <li><strong>Phone:</strong> +91-99999-99999</li>
+                <li><strong>Location:</strong> Your City, Your State</li>
+                <li><strong>Instagram:</strong> @mj_handicraft</li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
+        <footer class="footer">
+          <p>© <span id="year"></span> MJ HandiCraft. All rights reserved.</p>
+        </footer>
+      </div>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
     <script src="src/script.js"></script>
   </body>
 </html>
-
