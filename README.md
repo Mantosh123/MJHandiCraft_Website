@@ -36,3 +36,4 @@ MJHandiCraft_website/
 │   └── script.js
 └── index.html
 ```
+NOTE: As of now, it is not fully functional. You need to run "index.html" to see the output.
