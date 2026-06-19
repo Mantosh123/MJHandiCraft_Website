@@ -2,6 +2,12 @@
 
 MJ HandiCraft is an e-commerce website for handcrafted jewellery and decor.
 
+## Live Website
+
+[MJHandiCrat](https://mantosh123.github.io/MJHandiCraft_Website/)
+
+If GitHub Pages is enabled for this repository, users can click the link above to open the website on the web.
+
 ## Adding Product Images
 
 To display your product images on the website:
@@ -21,7 +27,7 @@ To display your product images on the website:
 
 ## Folder Structure
 
-```
+```text
 MJHandiCraft_website/
 ├── assets/
 │   ├── pendant/
@@ -36,4 +42,5 @@ MJHandiCraft_website/
 │   └── script.js
 └── index.html
 ```
-NOTE: As of now, it is not fully functional. You need to run "index.html" to see the output.
+
+NOTE: If the live site is not available yet, you can still open `index.html` locally to view the project.
