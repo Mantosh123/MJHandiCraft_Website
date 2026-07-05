@@ -1,264 +1,257 @@
 const FALLBACK_IMAGE =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%23e2e8f0' width='200' height='200'/%3E%3Ctext fill='%2394a3b8' font-family='system-ui' font-size='14' x='50%25' y='50%25' text-anchor='middle' dy='.3em'%3EImage%3C/text%3E%3C/svg%3E";
 
+function slugify(value) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function toDisplayName(value) {
+  return value
+    .replace(/\.[^.]+$/, "")
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(" ")
+    .map(function (part) {
+      if (!part) return part;
+      if (/^\d+$/.test(part)) return part;
+      return part.charAt(0).toUpperCase() + part.slice(1).toLowerCase();
+    })
+    .join(" ");
+}
+
+function getCategoryTitle(folderParts) {
+  const categoryKey = folderParts[1];
+
+  if (categoryKey === "pandent") return "Pendants";
+  if (categoryKey === "earRing") return "Ear Rings";
+  if (categoryKey === "ArtAndCraft") return "Art And Craft";
+
+  return toDisplayName(categoryKey);
+}
+
+function getCollectionSubtitle(folderParts) {
+  const relevantParts = folderParts.slice(2);
+  return relevantParts.map(toDisplayName).join(" / ");
+}
+
+function getCodePrefix(folderParts) {
+  const title = getCategoryTitle(folderParts);
+  const prefixMap = {
+    Pendants: "PD",
+    "Ear Rings": "ER",
+    "Art And Craft": "AC",
+  };
+  const subtitleSeed = folderParts
+    .slice(2)
+    .join("-")
+    .replace(/[^a-zA-Z0-9]+/g, "")
+    .toUpperCase();
+
+  return prefixMap[title] + "-" + subtitleSeed;
+}
+
+function buildCollection(folder, files, options) {
+  const folderParts = folder.split("/");
+  const subtitle =
+    options && options.subtitle
+      ? options.subtitle
+      : getCollectionSubtitle(folderParts);
+
+  return {
+    id: slugify(subtitle || folderParts[folderParts.length - 1]),
+    aliases: options && options.aliases ? options.aliases : [],
+    title: getCategoryTitle(folderParts),
+    subtitle: subtitle,
+    menuLabel:
+      options && options.menuLabel ? options.menuLabel : subtitle,
+    folder: folder,
+    price: "Price on request",
+    codePrefix: getCodePrefix(folderParts),
+    files: files,
+  };
+}
+
 const productCollections = [
-  {
-    id: "pendants-1",
+  buildCollection("assets/pandent/Pendants_1", ["pendants_1.png", "pendants_2.png"], {
     aliases: ["products-pendant"],
-    title: "Pendants",
-    subtitle: "Pendants 1",
-    folder: "assets/pandent/Pendants_1",
-    price: "From INR 499",
-    codePrefix: "PD-001",
-    files: ["pendants_1.png", "pendants_2.png"],
-  },
-  {
-    id: "pendants-2",
-    title: "Pendants",
-    subtitle: "Pendants 2",
-    folder: "assets/pandent/Pendants_2",
-    price: "From INR 549",
-    codePrefix: "PD-002",
-    files: ["pendants_1.png", "pendants_2.png"],
-  },
-  {
-    id: "pendants-3",
-    title: "Pendants",
-    subtitle: "Pendants 3",
-    folder: "assets/pandent/Pendants_3",
-    price: "From INR 599",
-    codePrefix: "PD-003",
-    files: ["pendants_1.png", "pendants_2.png", "pendants_3.png"],
-  },
-  {
-    id: "earring-cherry-pendant-1",
+    subtitle: "Pendant Set 01",
+    menuLabel: "Set 01",
+  }),
+  buildCollection("assets/pandent/Pendants_2", ["pendants_1.png", "pendants_2.png"], {
+    subtitle: "Pendant Set 02",
+    menuLabel: "Set 02",
+  }),
+  buildCollection("assets/pandent/Pendants_3", [
+    "pendants_1.png",
+    "pendants_2.png",
+    "pendants_3.png",
+  ], {
+    subtitle: "Pendant Set 03",
+    menuLabel: "Set 03",
+  }),
+  buildCollection("assets/earRing/EarRing_55", [
+    "EarRing_55_01.png",
+    "EarRing_55_02.png",
+    "EarRing_55_03.png",
+    "EarRing_55_04.png",
+    "EarRing_55_05.png",
+    "EarRing_55_06.png",
+    "EarRing_55_07.png",
+    "EarRing_55_08.png",
+    "EarRing_55_09.png",
+    "EarRing_55_10.png",
+    "EarRing_55_11.png",
+    "EarRing_55_12.png",
+    "EarRing_55_13.png",
+    "EarRing_55_14.png",
+  ], {
     aliases: ["products-earring"],
-    title: "Ear Rings",
-    subtitle: "Cherry Pandent 1",
-    folder: "assets/earRing/CherryPandent_1",
-    price: "Price on request",
-    codePrefix: "ER-CP1",
-    files: [
-      "0CC42135-D8E1-4390-877B-7554FAC0D3B6.jpg",
-      "3CB2030E-2257-4DC1-B6DD-3436B529992C.jpg",
-      "6FAD0A12-8A22-4F80-A6E3-5005E8B21F4C.jpg",
-      "8D2B16BE-89AF-4C53-AD78-4399B3B5B8F8.jpg",
+    subtitle: "Ear Ring Collection 55",
+    menuLabel: "Collection 55",
+  }),
+  buildCollection("assets/earRing/Earring_48", [
+    "Earring_48_01.png",
+    "Earring_48_02.png",
+    "Earring_48_03.png",
+    "Earring_48_04.png",
+    "Earring_48_05.png",
+    "Earring_48_06.png",
+    "Earring_48_07.png",
+    "Earring_48_08.png",
+    "Earring_48_09.png",
+  ], {
+    subtitle: "Ear Ring Collection 48",
+    menuLabel: "Collection 48",
+  }),
+  buildCollection("assets/earRing/Earring_54", [
+    "Earring_54_01.png",
+    "Earring_54_02.png",
+    "Earring_54_03.png",
+  ], {
+    subtitle: "Ear Ring Collection 54",
+    menuLabel: "Collection 54",
+  }),
+  buildCollection("assets/earRing/Earring_57", [
+    "Earring_57_01.jpg",
+    "Earring_57_02.jpg",
+    "Earring_57_03.jpg",
+  ], {
+    subtitle: "Ear Ring Collection 57",
+    menuLabel: "Collection 57",
+  }),
+  buildCollection("assets/earRing/Earring_65", ["Earring_01_01.png", "Earring_01_02.png"], {
+    subtitle: "Ear Ring Collection 65",
+    menuLabel: "Collection 65",
+  }),
+  buildCollection("assets/earRing/Earring_66", [
+    "Earring_66_01.png",
+    "Earring_66_02.png",
+    "Earring_66_03.png",
+    "Earring_66_04.png",
+  ], {
+    subtitle: "Ear Ring Collection 66",
+    menuLabel: "Collection 66",
+  }),
+  buildCollection("assets/earRing/Earring_70", [
+    "Earring_70_01.jpg",
+    "Earring_70_02.jpg",
+    "Earring_70_03.jpg",
+    "Earring_70_04.jpg",
+  ], {
+    subtitle: "Ear Ring Collection 70",
+    menuLabel: "Collection 70",
+  }),
+  buildCollection("assets/earRing/Earring_75", ["Earring_75_01.jpg", "Earring_75_02.jpg"], {
+    subtitle: "Ear Ring Collection 75",
+    menuLabel: "Collection 75",
+  }),
+  buildCollection("assets/earRing/Earring_132", [
+    "Earring_132_01.jpg",
+    "Earring_132_02.jpg",
+    "Earring_132_03.jpg",
+  ], {
+    subtitle: "Ear Ring Collection 132",
+    menuLabel: "Collection 132",
+  }),
+  buildCollection("assets/earRing/Earring1_66", [
+    "Earring1_66_01.jpg",
+    "Earring1_66_02.jpg",
+    "Earring1_66_03.jpg",
+    "Earring1_66_04.jpg",
+  ], {
+    subtitle: "Ear Ring Collection 66A",
+    menuLabel: "Collection 66A",
+  }),
+  buildCollection("assets/earRing/Earring1_84", [
+    "Earring1_84_01.jpg",
+    "Earring1_84_02.jpg",
+    "Earring1_84_03.jpg",
+    "Earring1_84_04.jpg",
+  ], {
+    subtitle: "Ear Ring Collection 84A",
+    menuLabel: "Collection 84A",
+  }),
+  buildCollection("assets/earRing/EarRing_78", [
+    "EarRing_78_01.jpg",
+    "EarRing_78_02.jpg",
+    "EarRing_78_03.jpg",
+  ], {
+    subtitle: "Ear Ring Collection 78",
+    menuLabel: "Collection 78",
+  }),
+  buildCollection("assets/earRing/EarRing_84", ["EarRing_84_01.jpg", "EarRing_84_02.jpg"], {
+    subtitle: "Ear Ring Collection 84",
+    menuLabel: "Collection 84",
+  }),
+  buildCollection("assets/earRing/EarRing_95", [
+    "EarRing_95_01.jpg",
+    "EarRing_95_02.jpg",
+    "EarRing_95_03.jpg",
+    "EarRing_95_04.jpg",
+    "EarRing_95_05.jpg",
+    "EarRing_95_06.jpg",
+  ], {
+    subtitle: "Ear Ring Collection 95",
+    menuLabel: "Collection 95",
+  }),
+  buildCollection("assets/earRing/EarRing_108", [
+    "EarRing_108_01.jpg",
+    "EarRing_108_02.jpg",
+    "EarRing_108_03.jpg",
+    "EarRing_108_04.jpg",
+  ], {
+    subtitle: "Ear Ring Collection 108",
+    menuLabel: "Collection 108",
+  }),
+  buildCollection(
+    "assets/ArtAndCraft/Pipclenears_70/Pipclenears_70_01",
+    [
+      "Pipclenears_70_01.jpg",
+      "Pipclenears_70_02.jpg",
+      "Pipclenears_70_03.jpg",
+      "Pipclenears_70_04.jpg",
     ],
-  },
-  {
-    id: "earring-cherry-pendant-2",
-    title: "Ear Rings",
-    subtitle: "Cherry Pandent 2",
-    folder: "assets/earRing/CherryPandent_2",
-    price: "Price on request",
-    codePrefix: "ER-CP2",
-    files: [
-      "A173FE7D-2488-4AE0-9AE9-1A0E03883774.jpg",
-      "B1E267E7-5BA1-44EB-B732-451941B99060.PNG",
-      "C7B2B881-C556-4C7E-8CD7-8B9F4E5FF183.jpg",
-      "E44286AB-A13E-45F9-8005-691E4EA19929.PNG",
-    ],
-  },
-  {
-    id: "earring-55",
-    title: "Ear Rings",
-    subtitle: "EarRing 55",
-    folder: "assets/earRing/EarRing_55",
-    price: "Price on request",
-    codePrefix: "ER-055",
-    files: [
-      "EarRING_10.PNG",
-      "EarRing_01.PNG",
-      "EarRing_02.PNG",
-      "EarRing_03.PNG",
-      "EarRing_04.PNG",
-      "EarRing_05.PNG",
-      "EarRing_06.PNG",
-      "EarRing_07.PNG",
-      "EarRing_08.PNG",
-      "EarRing_11.PNG",
-      "EarRing_12.PNG",
-      "EarRing_13.PNG",
-      "EarRing_14.PNG",
-      "EariRng_09.PNG",
-    ],
-  },
-  {
-    id: "earring-84",
-    title: "Ear Rings",
-    subtitle: "EarRing 84",
-    folder: "assets/earRing/EarRing_84",
-    price: "Price on request",
-    codePrefix: "ER-084",
-    files: ["EarRing_01.PNG", "EarRing_02.PNG"],
-  },
-  {
-    id: "earring1-66",
-    title: "Ear Rings",
-    subtitle: "Earring 1 66",
-    folder: "assets/earRing/Earring1_66",
-    price: "Price on request",
-    codePrefix: "ER-166",
-    files: [
-      "0CC42135-D8E1-4390-877B-7554FAC0D3B6.jpg",
-      "3CB2030E-2257-4DC1-B6DD-3436B529992C.jpg",
-      "6FAD0A12-8A22-4F80-A6E3-5005E8B21F4C.jpg",
-      "8D2B16BE-89AF-4C53-AD78-4399B3B5B8F8.jpg",
-    ],
-  },
-  {
-    id: "earring1-84",
-    title: "Ear Rings",
-    subtitle: "Earring 1 84",
-    folder: "assets/earRing/Earring1_84",
-    price: "Price on request",
-    codePrefix: "ER-184",
-    files: [
-      "5F9C667A-59E3-43B0-AF80-D21C77B7B7FC.PNG",
-      "DDF80872-7679-4F3F-8DC3-8C4847AD4268.PNG",
-      "E1211D54-183D-45DC-B34F-46C9CAE535E8.PNG",
-      "EAD9B04A-F01A-4C0B-8BD1-153284894DF4.PNG",
-    ],
-  },
-  {
-    id: "earring-45",
-    title: "Ear Rings",
-    subtitle: "Earring 45",
-    folder: "assets/earRing/Earring_45",
-    price: "Price on request",
-    codePrefix: "ER-045",
-    files: [
-      "2CB47031-F301-433D-92CD-8BB5080F0B10.PNG",
-      "59451117-2F4F-4479-B0ED-B867E2252160.PNG",
-    ],
-  },
-  {
-    id: "earring-48",
-    title: "Ear Rings",
-    subtitle: "Earring 48",
-    folder: "assets/earRing/Earring_48",
-    price: "Price on request",
-    codePrefix: "ER-048",
-    files: [
-      "34C0ACFE-A790-4E99-8244-8D4F1EFF9A13.PNG",
-      "52B0589D-A878-41CA-9DF0-179DA4C36DDF.PNG",
-      "6BC7ABA2-468A-418E-BA6C-D44BAD257C39.PNG",
-      "80109F08-19EA-43F9-9D36-5AF7B933A77D.PNG",
-      "91F2F875-3CF9-463A-B8AA-514579580238.PNG",
-      "9EB5B84B-99F9-4465-8BC8-C48ECD8B4E15.PNG",
-      "C9A6B20F-F24E-4A25-BFF2-415337AC2C79.PNG",
-      "D627B19A-D79B-42A5-A3FB-4B9E810C082D.PNG",
-      "FAA89BA5-D3A5-4416-9257-06557684B072.PNG",
-    ],
-  },
-  {
-    id: "earring-108",
-    title: "Ear Rings",
-    subtitle: "EarRing 108",
-    folder: "assets/earRing/earRing_108",
-    price: "Price on request",
-    codePrefix: "ER-108",
-    files: [
-      "079AD770-9102-48CE-A711-B98526C59028.PNG",
-      "84DAEF39-CFA3-41D2-9B22-D1AC9EFA8CDE.PNG",
-      "A1F04017-329C-46C1-ACA8-DE479BE09964.PNG",
-      "D964966E-D9DB-4D25-817B-6311B107403F.PNG",
-    ],
-  },
-  {
-    id: "earring-78",
-    title: "Ear Rings",
-    subtitle: "EarRing 78",
-    folder: "assets/earRing/earRing_78",
-    price: "Price on request",
-    codePrefix: "ER-078",
-    files: [
-      "12F47CDB-7E28-48FA-AA91-01491E6EBE27.PNG",
-      "46EEC2EA-0A97-43A0-849E-986C46AD762F.PNG",
-      "FFA4ADB0-74D6-4021-B1F8-AE251239A04C.PNG",
-    ],
-  },
-  {
-    id: "earring-95",
-    title: "Ear Rings",
-    subtitle: "EarRing 95",
-    folder: "assets/earRing/earRing_95",
-    price: "Price on request",
-    codePrefix: "ER-095",
-    files: [
-      "1BEDBAC6-04D7-4588-8B9C-1652BE373DFD.PNG",
-      "21389EF4-B29C-4C69-B9FE-67D67F1C0D05.PNG",
-      "D9CE6DAC-7075-48B1-9969-B1F40FA2AAEA.PNG",
-      "E27F03E0-A70A-43C4-9F59-79743F66B471.PNG",
-      "F13D8AD5-B1C5-40A6-B7C4-F4D35DC40611.PNG",
-      "F811AA99-3D8D-4B2D-84B6-F23D6B7953CA.PNG",
-    ],
-  },
-  {
-    id: "earring-132",
-    title: "Ear Rings",
-    subtitle: "Earring 132",
-    folder: "assets/earRing/earring_132",
-    price: "Price on request",
-    codePrefix: "ER-132",
-    files: [
-      "2038802C-7DF1-4FBD-92F2-DEA6F692F214.jpg",
-      "90A28F41-B8E0-4BC1-8AD1-3EEA0A25CAFA.jpg",
-      "9C94DCF9-3B95-46EC-9A94-DAE95A29FD8A.jpg",
-    ],
-  },
-  {
-    id: "earring-54",
-    title: "Ear Rings",
-    subtitle: "Earring 54",
-    folder: "assets/earRing/earring_54",
-    price: "Price on request",
-    codePrefix: "ER-054",
-    files: [
-      "59439C8F-BE54-4B66-97A9-AE8E581B356E.jpg",
-      "B589CEC2-2C01-4D37-A139-7081D7152E8A.PNG",
-      "B84A02EB-AE73-4745-BADC-A942A337292E.jpg",
-    ],
-  },
-  {
-    id: "earring-66-lower",
-    title: "Ear Rings",
-    subtitle: "Earring 66",
-    folder: "assets/earRing/earring_66",
-    price: "Price on request",
-    codePrefix: "ER-066",
-    files: [
-      "A173FE7D-2488-4AE0-9AE9-1A0E03883774.jpg",
-      "B1E267E7-5BA1-44EB-B732-451941B99060.PNG",
-      "C7B2B881-C556-4C7E-8CD7-8B9F4E5FF183.jpg",
-      "E44286AB-A13E-45F9-8005-691E4EA19929.PNG",
-    ],
-  },
-  {
-    id: "earring-75",
-    title: "Ear Rings",
-    subtitle: "Earring 75",
-    folder: "assets/earRing/earring_75",
-    price: "Price on request",
-    codePrefix: "ER-075",
-    files: [
-      "4C7F0BF4-B29D-4009-8CC0-033D85C0E33C.jpg",
-      "746D914C-3B6C-4E3B-B2A0-C23FCA824397.jpg",
-    ],
-  },
-  {
-    id: "earring-new",
-    title: "Ear Rings",
-    subtitle: "Earring New",
-    folder: "assets/earRing/earring_new",
-    price: "Price on request",
-    codePrefix: "ER-NEW",
-    files: [
-      "59439C8F-BE54-4B66-97A9-AE8E581B356E.jpg",
-      "B589CEC2-2C01-4D37-A139-7081D7152E8A.PNG",
-      "B84A02EB-AE73-4745-BADC-A942A337292E.jpg",
-    ],
-  },
+    {
+      aliases: ["products-decor"],
+      subtitle: "Art And Craft Set 01",
+      menuLabel: "Set 01",
+    }
+  ),
+  buildCollection("assets/ArtAndCraft/Pipclenears_70/Pipclenears_70_02", [
+    "Pipclenears_70_02_01.jpg",
+    "Pipclenears_70_02_02.jpg",
+    "Pipclenears_70_02_03.jpg",
+    "Pipclenears_70_02_04.jpg",
+    "Pipclenears_70_02_05.jpg",
+  ], {
+    subtitle: "Art And Craft Set 02",
+    menuLabel: "Set 02",
+  }),
 ];
 
 function createAliasAnchor(aliasId) {
@@ -285,7 +278,7 @@ function createProductCard(collection, file, index) {
 
   const imgEl = document.createElement("img");
   imgEl.src = collection.folder + "/" + file;
-  imgEl.alt = collection.subtitle + " Design " + (index + 1);
+  imgEl.alt = collection.subtitle + " - " + toDisplayName(file);
   imgEl.loading = "lazy";
   attachImageFallback(imgEl);
   imageWrapEl.appendChild(imgEl);
@@ -295,7 +288,7 @@ function createProductCard(collection, file, index) {
 
   const nameEl = document.createElement("h4");
   nameEl.className = "product-name";
-  nameEl.textContent = "Design " + String(index + 1).padStart(2, "0");
+  nameEl.textContent = toDisplayName(file);
 
   const subtitleEl = document.createElement("p");
   subtitleEl.className = "product-subtitle";
@@ -452,4 +445,3 @@ document.addEventListener("DOMContentLoaded", function () {
   renderProductGallery();
   initSidebar();
 });
-
